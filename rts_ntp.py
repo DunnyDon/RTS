@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from datetime import datetime, date, time
 import time
 import matplotlib.pyplot as plt
@@ -61,9 +62,12 @@ for key, value in time_data.iteritems():
 		#print type(date), type(date.strftime("%Y-%m-%d %H:%M:%S")),date,value[date]
 		#print k.strip('-').strip('+').strip('*'),val
 		col_dict = k.strip('-').strip('+').strip('*').strip('x')
-		print date,val['offset'],plot_colours[col_dict]
-		plt.scatter(date,val['offset'],color=plot_colours[col_dict])
+		#print date,val['offset'],plot_colours[col_dict]
+		plt.scatter(date,val['offset'],color=plot_colours[col_dict],label = col_dict)
 		plt.pause(0.01)
 	#print key, type(key)
-
+print 'Done'
+handles, labels = plt.gca().get_legend_handles_labels()
+by_label = OrderedDict(zip(labels, handles))
+plt.legend(by_label.values(), by_label.keys())
 plt.show()
